@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const Connection = require('./config/mongoose');
+const InfoModel = require('./model/infoSchema');
 //secure key put it into .env at production
 const key = "demoKey";
 
@@ -33,18 +34,28 @@ io.on('connection', (socket) => {
 			return decryptText(encryptedMessage, key);
 		});
 
-		const date = new Date();
-
 		try {
 			const dataToInsert = decryptedMessage.map((message) => ({
-				...message, 
-				timestamp: date
+				...message
 			}));
-			
+			console.log(dataToInsert);
+			await InfoModel.insertMany(dataToInsert);
 		} catch (error) {
-			
+			console.log("Error while inserting data",error.message);
 		}
-	})
-})
+		console.log('decryptedMessage', decryptedMessage);
+	});
+});
+
+app.get('/api/data', async (req, res) => {
+	try {
+		const data = await InfoModel.find();
+		console.log(data);
+		res.json(data);
+	} catch (error) {
+		console.log(error.message);
+		res.status(500).json({message:"Internal Server Error"});
+	}
+});
 
 server.listen(port, console.log(`Server is up at: ${port}`));
