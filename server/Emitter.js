@@ -1,5 +1,5 @@
-const crypto = require('crypto')
-const socketClient = require('socket.io-client')
+const crypto = require('crypto');
+const socketClient = require('socket.io-client');
 const { names, cities } = require('./data.json');
 const key = 'demoKey';
 
@@ -25,7 +25,6 @@ function generateRandomMessage() {
     catch (error) {
         console.error("error", error.message)
     }
-
 }
 
 function encryptMessage(message, key) {
@@ -39,9 +38,9 @@ function encryptMessage(message, key) {
     catch (error) {
         console.error("Error :", error.message)
     }
-}
+};
 
-const socket = socketClient('http://localhost:8000')
+const socket = socketClient('http://localhost:8000');
 const Interval = 10000;
 
 setInterval(() => {

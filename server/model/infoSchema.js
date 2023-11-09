@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const infoSchema = mongoose.Schema({
+const infoSchema = new mongoose.Schema({
 	names:{
 		type:String,
 		required:true
@@ -8,9 +8,8 @@ const infoSchema = mongoose.Schema({
 	cities:{
 		type:String,
 		required:true
-	}
-}, {
-	timestamps:true
+	},
+	timestamp: Date
 });
 
 const InfoModel = mongoose.model('Info', infoSchema);

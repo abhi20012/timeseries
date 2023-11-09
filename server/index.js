@@ -34,9 +34,12 @@ io.on('connection', (socket) => {
 			return decryptText(encryptedMessage, key);
 		});
 
+		const date = new Date();
+
 		try {
 			const dataToInsert = decryptedMessage.map((message) => ({
-				...message
+				...message,
+				timestamp:date
 			}));
 			console.log(dataToInsert);
 			await InfoModel.insertMany(dataToInsert);
