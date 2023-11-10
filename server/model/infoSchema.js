@@ -1,15 +1,9 @@
 const mongoose = require('mongoose');
 
 const infoSchema = new mongoose.Schema({
-	names:{
-		type:String,
-		required:true
-	},
-	cities:{
-		type:String,
-		required:true
-	},
-	timestamp: Date
+	names:String, 
+	cities:String,
+	timestamp:Date
 });
 
 const InfoModel = mongoose.model('Info', infoSchema);

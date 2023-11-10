@@ -4,7 +4,8 @@ const Connection = require('./config/mongoose');
 const InfoModel = require('./model/infoSchema');
 //secure key put it into .env at production
 const key = "demoKey";
-
+const cors = require('cors');
+app.use(cors());
 const port = process.env.port || 8000;
 
 const http = require('http');

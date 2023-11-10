@@ -1,12 +1,11 @@
 const crypto = require('crypto');
 const socketClient = require('socket.io-client');
 const { names, cities } = require('./data.json');
-const key = 'demoKey';
 
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
-
+const key = 'demoKey';
 function generateRandomMessage() {
     try {
         const name = getRandomElement(names);
@@ -17,7 +16,7 @@ function generateRandomMessage() {
             city: city,
         };
 
-        const secretKey = crypto.createHash('sha256').update(JSON.stringify(originalMessage)).digest('hex');
+        const key = crypto.createHash('sha256').update(JSON.stringify(originalMessage)).digest('hex');
         console.log('secretKey : ', key)
 
         return { ...originalMessage, key };
